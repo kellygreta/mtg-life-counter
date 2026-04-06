@@ -98,14 +98,13 @@ function SetupScreen({
   onStart,
 }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4">
-      <div className="bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl rounded-3xl p-10 shadow-2xl border border-slate-700/50 max-w-lg w-full">
+    <div className="fixed inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-10 overflow-y-auto">
+      <div className="bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl rounded-3xl p-6 shadow-2xl border border-slate-700/50 w-full max-w-lg my-auto">
         <div className="text-center mb-10">
-          <div className="text-7xl mb-4 animate-pulse">✨</div>
-          <h1 className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 mb-2">
-            MTG Life Counter
+          <h1 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 mb-2">
+            ✨ MTG Life Counter ✨
           </h1>
-          <p className="text-slate-400 text-sm">Track your game with style</p>
+          <p className="text-slate-400 text-sm">Track your battles in style</p>
         </div>
 
         <OptionSelector
@@ -128,7 +127,7 @@ function SetupScreen({
 
         <button
           onClick={onStart}
-          className="w-full py-5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white rounded-2xl text-xl font-bold transition-all shadow-lg hover:shadow-cyan-500/50 transform hover:scale-105 hover:shadow-2xl"
+          className="w-full py-4  bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white rounded-2xl text-xl font-bold transition-all shadow-lg hover:shadow-cyan-500/50 transform hover:scale-105 hover:shadow-2xl"
         >
           ⚔️ Start Game
         </button>
@@ -147,16 +146,16 @@ function OptionSelector({
   activeColor,
 }) {
   return (
-    <div className="mb-8">
-      <label className="block text-slate-300 text-lg font-bold mb-4">
+    <div className="mb-6 ">
+      <label className="block text-slate-300 text-basefont-bold mb-3 ">
         {label}
       </label>
-      <div className={`grid ${gridCols} gap-3`}>
+      <div className={`grid ${gridCols} gap-2`}>
         {options.map((option) => (
           <button
             key={option}
             onClick={() => onSelect(option)}
-            className={`py-4 rounded-xl text-xl font-bold transition-all ${
+            className={`py-3 sm:py-4 rounded-2xl text-lg font-bold transition-all ${
               selected === option
                 ? `bg-gradient-to-br ${activeColor} text-white scale-105 shadow-lg`
                 : "bg-slate-700/50 text-slate-300 hover:bg-slate-600/50 hover:scale-105"
@@ -170,7 +169,6 @@ function OptionSelector({
   );
 }
 
-// Game Board Component
 function GameBoard({
   players,
   numPlayers,
@@ -225,39 +223,39 @@ function MenuModal({ isOpen, onClose, onReset, onBackToSetup }) {
         onClick={onClose}
       />
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
-        <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 max-w-md w-full shadow-2xl border border-slate-700 pointer-events-auto transform transition-all">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+        <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl border border-slate-700 pointer-events-auto transform transition-all">
+          <div className="flex justify-between items-center mb-6 sm:mb-8">
+            <h2 className="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
               Game Menu
             </h2>
             <button
               onClick={onClose}
-              className="text-slate-400 hover:text-white transition-colors hover:rotate-90 transform duration-300"
+              className="text-slate-400 hover:text-black transition-colors transform duration-300"
             >
-              <X size={32} strokeWidth={2.5} />
+              <X size={28} strokeWidth={2.5} />
             </button>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             <button
               onClick={onReset}
-              className="w-full py-4 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white rounded-2xl text-lg font-bold transition-all shadow-lg hover:shadow-orange-500/50 flex items-center justify-center gap-3 transform hover:scale-105"
+              className="w-full py-3 sm:py-4 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white rounded-2xl text-base sm:text-lg font-bold transition-all shadow-lg hover:shadow-orange-500/50 flex items-center justify-center gap-2 sm:gap-3 transform hover:scale-105"
             >
-              <RotateCcw size={24} />
+              <RotateCcw size={20} />
               Reset Game
             </button>
 
             <button
               onClick={onBackToSetup}
-              className="w-full py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white rounded-2xl text-lg font-bold transition-all shadow-lg hover:shadow-cyan-500/50 flex items-center justify-center gap-3 transform hover:scale-105"
+              className="w-full py-3 sm:py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white rounded-2xl text-base sm:text-lg font-bold transition-all shadow-lg hover:shadow-cyan-500/50 flex items-center justify-center gap-2 sm:gap-3 transform hover:scale-105"
             >
-              <Settings size={24} />
+              <Settings size={20} />
               New Game
             </button>
 
             <button
               onClick={onClose}
-              className="w-full py-4 bg-slate-700 hover:bg-slate-600 text-white rounded-2xl text-lg font-bold transition-all transform hover:scale-105"
+              className="w-full py-3 sm:py-4 bg-slate-700 hover:bg-slate-600 text-white rounded-2xl text-base sm:text-lg font-bold transition-all transform hover:scale-105"
             >
               Continue Playing
             </button>
@@ -314,7 +312,7 @@ function GameStyles() {
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        padding: 1.5rem;
+        padding: 1rem;
         position: relative;
         transition: all 0.5s ease;
       }
@@ -327,24 +325,34 @@ function GameStyles() {
       .increment-btn {
         font-size: 2.5rem;
         font-weight: 900;
-        padding: 1rem;
-        border-radius: 1.25rem;
+        padding: 0.5rem;
+        border-radius: 1.5rem;
         transition: all 0.2s;
-        border: 3px solid rgba(0, 0, 0, 0.3);
+        border: 3px solid rgba(0, 0, 0, 0.25);
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(12px);
         color: #000;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.2);
       }
+
+      @media (min-width: 640px) {
+        .increment-btn {
+          padding: 1rem;
+          border-radius: 1.75rem;
+        }
+      }
+
       .increment-btn:hover {
-        background: rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.3);
         transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        border-color: rgba(0, 0, 0, 0.4);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        border-color: rgba(0, 0, 0, 0.35);
       }
       .increment-btn:active {
         transform: translateY(0) scale(0.95);
@@ -356,63 +364,102 @@ function GameStyles() {
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 50;
-        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-        border: 4px solid #334155;
+        background: radial-gradient(circle at 30% 30%, #1e3a8a, #0f172a);
+        border: 0;
         border-radius: 50%;
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.7),
-                    0 12px 30px rgba(0, 0, 0, 0.8);
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 
+          0 0 0 0 rgba(59, 130, 246, 0),
+          0 0 20px rgba(59, 130, 246, 0.4),
+          0 10px 25px rgba(0, 0, 0, 0.5),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .menu-button::before {
+        content: '';
+        position: absolute;
+        inset: -4px;
+        border-radius: 50%;
+        padding: 4px;
+        background: linear-gradient(135deg, #3b82f6, #06b6d4, #3b82f6);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      
+      .menu-button:hover::before {
+        opacity: 1;
+        animation: rotate-gradient 3s linear infinite;
+      }
+
+      @keyframes rotate-gradient {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
       }
       
       .menu-button:hover {
-        background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-        border-color: #06b6d4;
-        transform: translate(-50%, -50%) scale(1.15) rotate(90deg);
-        box-shadow: 0 0 0 8px rgba(6, 182, 212, 0.2),
-                    0 0 40px rgba(6, 182, 212, 0.6),
-                    0 16px 40px rgba(0, 0, 0, 0.9);
+        background: radial-gradient(circle at 30% 30%, #2563eb, #1e3a8a);
+        transform: translate(-50%, -50%) scale(1.1);
+        box-shadow: 
+          0 0 0 8px rgba(59, 130, 246, 0.15),
+          0 0 30px rgba(59, 130, 246, 0.6),
+          0 0 50px rgba(6, 182, 212, 0.3),
+          0 15px 35px rgba(0, 0, 0, 0.6),
+          inset 0 2px 0 rgba(255, 255, 255, 0.2);
+      }
+
+      .menu-button:active {
+        transform: translate(-50%, -50%) scale(1.05);
       }
 
       .menu-button svg {
-        transition: all 0.4s;
+        transition: all 0.3s;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
       }
 
       .menu-button:hover svg {
-        filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.8));
-      }
-
-      @keyframes pulse-ring {
-        0% {
-          box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.7);
-        }
-        70% {
-          box-shadow: 0 0 0 12px rgba(6, 182, 212, 0);
-        }
-        100% {
-          box-shadow: 0 0 0 0 rgba(6, 182, 212, 0);
-        }
+        filter: drop-shadow(0 0 8px rgba(59, 130, 246, 1)) drop-shadow(0 0 12px rgba(6, 182, 212, 0.8));
       }
 
       .counter-badge {
         position: absolute;
-        top: 0.75rem;
-        right: 0.75rem;
-        background: rgba(0, 0, 0, 0.7);
-        backdrop-filter: blur(10px);
+        top: 0.5rem;
+        right: 0.5rem;
+        background: rgba(10, 0, 0, 0.75);
+        backdrop-filter: blur(12px);
         border-radius: 1.25rem;
-        padding: 0.5rem 1rem;
-        font-size: 0.875rem;
+        padding: 0.4rem 0.85rem;
+        font-size: 0.8rem;
         font-weight: bold;
         display: flex;
-        gap: 0.75rem;
+        gap: 0.6rem;
         align-items: center;
-        border: 2px solid rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      @media (min-width: 640px) {
+        .counter-badge {
+          top: 0.75rem;
+          right: 0.75rem;
+          border-radius: 1.5rem;
+          padding: 0.5rem 1rem;
+          font-size: 0.9rem;
+          gap: 0.75rem;
+        }
       }
 
       .counter-item {
@@ -447,7 +494,7 @@ function MenuButton({ onClick }) {
       title="Menu"
       aria-label="Open Menu"
     >
-      <Menu size={36} color="#06b6d4" strokeWidth={2.5} />
+      <Menu size={36} color="#60a5fa" strokeWidth={2.5} />
     </button>
   );
 }
@@ -466,8 +513,11 @@ function PlayerCard({ player, index, onUpdateLife, onUpdateCounter }) {
         player.energy > 0 ||
         player.commanderDamage > 0) && <CounterBadges player={player} />}
 
-      <PlayerHeader name={player.name} isDefeated={isDefeated} />
-      <LifeDisplay life={player.life} isDefeated={isDefeated} />
+      <LifeDisplay
+        life={player.life}
+        isDefeated={isDefeated}
+        playerName={player.name}
+      />
       <LifeControls playerId={player.id} onUpdateLife={onUpdateLife} />
       <ActionIcons
         playerId={player.id}
@@ -500,29 +550,16 @@ function CounterBadges({ player }) {
   );
 }
 
-// Player Header Component
-function PlayerHeader({ name, isDefeated }) {
-  return (
-    <div className="w-full flex justify-center items-center mb-2">
-      <span
-        className={`text-sm font-bold ${isDefeated ? "text-gray-400" : "text-black text-opacity-60"}`}
-      >
-        {name} {isDefeated && "💀"}
-      </span>
-    </div>
-  );
-}
-
 // Life Display Component
-function LifeDisplay({ life, isDefeated }) {
+function LifeDisplay({ life, isDefeated, playerName }) {
   return (
-    <div className="flex-1 flex items-center justify-center w-full">
+    <div className="flex-1 flex flex-col items-center justify-center w-full">
       <div
-        className="text-9xl font-black leading-none select-none"
+        className="text-9xl  font-black leading-none select-none mb-2"
         style={{
           textShadow: isDefeated
-            ? "0 4px 12px rgba(0,0,0,0.5)"
-            : "0 6px 16px rgba(0,0,0,0.25)",
+            ? "0 6px 20px rgba(0,0,0,0.6)"
+            : "0 8px 24px rgba(0,0,0,0.3)",
           color: isDefeated ? "#4a4a4a" : "#000",
           fontWeight: 900,
         }}
@@ -530,6 +567,11 @@ function LifeDisplay({ life, isDefeated }) {
       >
         {life}
       </div>
+      <span
+        className={`text-sm sm:text-base font-bold ${isDefeated ? "text-gray-400" : "text-black text-opacity-60"}`}
+      >
+        {playerName} {isDefeated && "💀"}
+      </span>
     </div>
   );
 }
@@ -537,7 +579,7 @@ function LifeDisplay({ life, isDefeated }) {
 // Life Controls Component
 function LifeControls({ playerId, onUpdateLife }) {
   return (
-    <div className="grid grid-cols-2 gap-4 w-full max-w-md">
+    <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full max-w-md">
       <button
         onClick={() => onUpdateLife(playerId, -1)}
         className="increment-btn"
@@ -559,7 +601,7 @@ function LifeControls({ playerId, onUpdateLife }) {
 // Action Icons Component
 function ActionIcons({ playerId, player, onUpdateCounter }) {
   return (
-    <div className="w-full flex justify-center gap-3 mt-4">
+    <div className="w-full flex justify-center gap-3  mt-3 ">
       <CounterButton
         icon="⚡"
         label="Energy"
@@ -593,9 +635,9 @@ function CounterButton({ icon, label, value, onClick, danger }) {
     <div className="relative">
       <button
         onClick={() => setShowControls(!showControls)}
-        className={`text-3xl transition-all ${
+        className={`text-2xl sm:text-3xl transition-all ${
           value > 0
-            ? "text-black text-opacity-90 scale-125 filter drop-shadow-lg"
+            ? "text-black text-opacity-90 scale-110 sm:scale-125 filter drop-shadow-lg"
             : "text-black text-opacity-40 hover:text-opacity-70 hover:scale-110"
         } ${danger ? "animate-pulse" : ""}`}
         aria-label={label}
@@ -605,23 +647,23 @@ function CounterButton({ icon, label, value, onClick, danger }) {
       </button>
 
       {showControls && (
-        <div className="absolute bottom-full mb-3 left-1/2 transform -translate-x-1/2 bg-slate-900 bg-opacity-95 backdrop-blur-md rounded-xl p-3 flex gap-2 whitespace-nowrap shadow-2xl border border-slate-700">
+        <div className="absolute bottom-full mb-2 sm:mb-3 left-1/2 transform -translate-x-1/2 bg-slate-900 bg-opacity-95 backdrop-blur-md rounded-xl sm:rounded-2xl p-2 sm:p-3 flex gap-2 whitespace-nowrap shadow-2xl border border-slate-700 z-10">
           <button
             onClick={() => {
               onClick(-1);
             }}
-            className="px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-lg font-bold text-sm transition-all transform hover:scale-105"
+            className="px-3 sm:px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-lg sm:rounded-xl font-bold text-xs sm:text-sm transition-all transform hover:scale-105 shadow-lg"
           >
             -
           </button>
-          <span className="px-3 py-2 text-white font-bold text-sm bg-slate-700 rounded-lg min-w-[2rem] text-center">
+          <span className="px-2 sm:px-3 py-2 text-white font-bold text-xs sm:text-sm bg-slate-700 rounded-lg sm:rounded-xl min-w-[1.5rem] sm:min-w-[2rem] text-center">
             {value}
           </span>
           <button
             onClick={() => {
               onClick(1);
             }}
-            className="px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-lg font-bold text-sm transition-all transform hover:scale-105"
+            className="px-3 sm:px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-lg sm:rounded-xl font-bold text-xs sm:text-sm transition-all transform hover:scale-105 shadow-lg"
           >
             +
           </button>
