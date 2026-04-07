@@ -400,7 +400,6 @@ function GameStyles() {
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 50;
-        background: radial-gradient(circle at 30% 30%, #1e3a8a, #0f172a);
         border: 0;
         border-radius: 50%;
         width: 60px;
@@ -446,30 +445,14 @@ function GameStyles() {
         }
       }
       
-      .menu-button:hover {
-        background: radial-gradient(circle at 30% 30%, #2563eb, #1e3a8a);
-        transform: translate(-50%, -50%) scale(1.1);
-        box-shadow: 
-          0 0 0 8px rgba(59, 130, 246, 0.15),
-          0 0 30px rgba(59, 130, 246, 0.6),
-          0 0 50px rgba(6, 182, 212, 0.3),
-          0 15px 35px rgba(0, 0, 0, 0.6),
-          inset 0 2px 0 rgba(255, 255, 255, 0.2);
-      }
-
       .menu-button:active {
         transform: translate(-50%, -50%) scale(1.05);
       }
 
       .menu-button svg {
         transition: all 0.3s;
-        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
       }
-
-      .menu-button:hover svg {
-        filter: drop-shadow(0 0 8px rgba(59, 130, 246, 1)) drop-shadow(0 0 12px rgba(6, 182, 212, 0.8));
-      }
-
+      
       .counter-badge {
         position: absolute;
         top: 0.5rem;
@@ -668,10 +651,10 @@ function CounterButton({ icon, label, value, onClick, danger }) {
   const [showControls, setShowControls] = useState(false);
 
   return (
-    <div className="relative">
+    <div className="">
       <button
         onClick={() => setShowControls(!showControls)}
-        className={`text-2xl sm:text-3xl transition-all ${
+        className={`text-xl transition-all ${
           value > 0
             ? "text-black text-opacity-90 scale-110 sm:scale-125 filter drop-shadow-lg"
             : "text-black text-opacity-40 hover:text-opacity-70 hover:scale-110"
