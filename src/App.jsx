@@ -169,6 +169,7 @@ function OptionSelector({
   );
 }
 
+// Game Board Component
 function GameBoard({
   players,
   numPlayers,
@@ -230,7 +231,7 @@ function MenuModal({ isOpen, onClose, onReset, onBackToSetup }) {
             </h2>
             <button
               onClick={onClose}
-              className="text-slate-400 hover:text-black transition-colors transform duration-300"
+              className="text-slate-400 hover:text-white transition-colors hover:rotate-90 transform duration-300"
             >
               <X size={28} strokeWidth={2.5} />
             </button>
@@ -278,6 +279,7 @@ function GameStyles() {
         background: #000;
       }
 
+      /* Mobile/Tablet: Original layout with rotations */
       .grid-two-player {
         grid-template-rows: 1fr 1fr;
       }
@@ -307,6 +309,39 @@ function GameStyles() {
         transform: rotate(180deg);
       }
 
+      /* Desktop: Vertical split, no rotations */
+      @media (min-width: 1024px) {
+        .grid-two-player {
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: 1fr;
+        }
+        .grid-two-player .player-card:first-child {
+          transform: none;
+        }
+
+        .grid-three-player {
+          grid-template-columns: 1fr 1fr 1fr;
+          grid-template-rows: 1fr;
+        }
+        .grid-three-player .player-card:nth-child(1),
+        .grid-three-player .player-card:nth-child(2) {
+          transform: none;
+        }
+        .grid-three-player .player-card:nth-child(3) {
+          grid-column: auto;
+          grid-row: auto;
+        }
+
+        .grid-four-player {
+          grid-template-columns: 1fr 1fr 1fr 1fr;
+          grid-template-rows: 1fr;
+        }
+        .grid-four-player .player-card:nth-child(1),
+        .grid-four-player .player-card:nth-child(2) {
+          transform: none;
+        }
+      }
+
       .player-card {
         display: flex;
         flex-direction: column;
@@ -325,7 +360,7 @@ function GameStyles() {
       .increment-btn {
         font-size: 2.5rem;
         font-weight: 900;
-        padding: 0.5rem;
+        padding: 1rem;
         border-radius: 1.5rem;
         transition: all 0.2s;
         border: 3px solid rgba(0, 0, 0, 0.25);
@@ -342,7 +377,8 @@ function GameStyles() {
 
       @media (min-width: 640px) {
         .increment-btn {
-          padding: 1rem;
+          font-size: 3rem;
+          padding: 1.25rem;
           border-radius: 1.75rem;
         }
       }
@@ -438,7 +474,7 @@ function GameStyles() {
         position: absolute;
         top: 0.5rem;
         right: 0.5rem;
-        background: rgba(10, 0, 0, 0.75);
+        background: rgba(0, 0, 0, 0.75);
         backdrop-filter: blur(12px);
         border-radius: 1.25rem;
         padding: 0.4rem 0.85rem;
@@ -555,7 +591,7 @@ function LifeDisplay({ life, isDefeated, playerName }) {
   return (
     <div className="flex-1 flex flex-col items-center justify-center w-full">
       <div
-        className="text-9xl  font-black leading-none select-none mb-2"
+        className="text-9xl sm:text-[12rem] md:text-[14rem] font-black leading-none select-none mb-2"
         style={{
           textShadow: isDefeated
             ? "0 6px 20px rgba(0,0,0,0.6)"
@@ -601,7 +637,7 @@ function LifeControls({ playerId, onUpdateLife }) {
 // Action Icons Component
 function ActionIcons({ playerId, player, onUpdateCounter }) {
   return (
-    <div className="w-full flex justify-center gap-3  mt-3 ">
+    <div className="w-full flex justify-center gap-3 sm:gap-4 mt-3 sm:mt-4">
       <CounterButton
         icon="⚡"
         label="Energy"
