@@ -227,14 +227,14 @@ function MenuModal({ isOpen, onClose, onReset, onBackToSetup }) {
         onClick={onClose}
       />
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
-        <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl border border-slate-700 pointer-events-auto transform transition-all">
+        <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl border border-slate-700 pointer-events-auto">
           <div className="flex justify-between items-center mb-6 sm:mb-8">
             <h2 className="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
               Game Menu
             </h2>
             <button
               onClick={onClose}
-              className="text-slate-400 hover:text-white transition-colors hover:rotate-90 transform duration-300"
+              className="text-slate-400 hover:text-white transition-colors"
             >
               <X size={28} strokeWidth={2.5} />
             </button>
@@ -243,7 +243,7 @@ function MenuModal({ isOpen, onClose, onReset, onBackToSetup }) {
           <div className="space-y-3 sm:space-y-4">
             <button
               onClick={onReset}
-              className="w-full py-3 sm:py-4 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white rounded-2xl text-base sm:text-lg font-bold transition-all shadow-lg hover:shadow-orange-500/50 flex items-center justify-center gap-2 sm:gap-3 transform hover:scale-105"
+              className="w-full py-3 sm:py-4 bg-orange-600 hover:bg-orange-700 text-white rounded-2xl text-base sm:text-lg font-bold transition-colors flex items-center justify-center gap-2 sm:gap-3"
             >
               <RotateCcw size={20} />
               Reset Game
@@ -251,7 +251,7 @@ function MenuModal({ isOpen, onClose, onReset, onBackToSetup }) {
 
             <button
               onClick={onBackToSetup}
-              className="w-full py-3 sm:py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white rounded-2xl text-base sm:text-lg font-bold transition-all shadow-lg hover:shadow-cyan-500/50 flex items-center justify-center gap-2 sm:gap-3 transform hover:scale-105"
+              className="w-full py-3 sm:py-4 bg-cyan-600 hover:bg-cyan-700 text-white rounded-2xl text-base sm:text-lg font-bold transition-colors flex items-center justify-center gap-2 sm:gap-3"
             >
               <Settings size={20} />
               New Game
@@ -259,7 +259,7 @@ function MenuModal({ isOpen, onClose, onReset, onBackToSetup }) {
 
             <button
               onClick={onClose}
-              className="w-full py-3 sm:py-4 bg-slate-700 hover:bg-slate-600 text-white rounded-2xl text-base sm:text-lg font-bold transition-all transform hover:scale-105"
+              className="w-full py-3 sm:py-4 bg-slate-700 hover:bg-slate-600 text-white rounded-2xl text-base sm:text-lg font-bold transition-colors"
             >
               Continue Playing
             </button>
@@ -571,12 +571,7 @@ function MenuButton({ onClick }) {
       title="Menu"
       aria-label="Open Menu"
     >
-      <Menu
-        size={28}
-        color="#60a5fa"
-        strokeWidth={2.5}
-        className="sm:w-8 sm:h-8"
-      />
+      <Menu size={32} color="#60a5fa" strokeWidth={2.5} />
     </button>
   );
 }
@@ -635,22 +630,21 @@ function CounterBadges({ player }) {
 // Life Display Component
 function LifeDisplay({ life, isDefeated, playerName }) {
   return (
-    <div className="flex-1 flex flex-col items-center justify-center w-full min-h-0">
+    <div className="flex-1 flex flex-col items-center justify-center w-full">
       <div
-        className="text-5xl sm:text-8xl lg:text-9xl xl:text-[10rem] font-black leading-none select-none mb-0.5 sm:mb-1"
+        className="font-black leading-none select-none mb-0.5 sm:mb-1"
         style={{
-          textShadow: isDefeated
-            ? "0 4px 16px rgba(0,0,0,0.6)"
-            : "0 6px 20px rgba(0,0,0,0.3)",
+          fontSize: "clamp(2.5rem, 20vw, 10rem)",
+          textShadow: `0 ${isDefeated ? "4px 16px" : "6px 20px"} rgba(0,0,0,${isDefeated ? "0.6" : "0.3"})`,
           color: isDefeated ? "#4a4a4a" : "#000",
-          fontWeight: 900,
         }}
         aria-label={`Life total: ${life}`}
       >
         {life}
       </div>
       <span
-        className={`text-[0.6rem] sm:text-xs lg:text-sm font-bold ${isDefeated ? "text-gray-400" : "text-black text-opacity-60"}`}
+        className={`font-bold ${isDefeated ? "text-gray-400" : "text-black text-opacity-60"}`}
+        style={{ fontSize: "clamp(0.5rem, 2.5vw, 0.875rem)" }}
       >
         {playerName} {isDefeated && "💀"}
       </span>
@@ -661,7 +655,7 @@ function LifeDisplay({ life, isDefeated, playerName }) {
 // Life Controls Component
 function LifeControls({ playerId, onUpdateLife }) {
   return (
-    <div className="grid grid-cols-2 gap-2 sm:gap-4 w-full max-w-md">
+    <div className="grid grid-cols-2 gap-2 sm:gap-3 w-full px-1 sm:px-2 max-w-sm">
       <button
         onClick={() => onUpdateLife(playerId, -1)}
         className="increment-btn"
@@ -683,7 +677,7 @@ function LifeControls({ playerId, onUpdateLife }) {
 // Action Icons Component
 function ActionIcons({ playerId, player, onUpdateCounter }) {
   return (
-    <div className="w-full flex justify-center gap-1 sm:gap-3 mt-1 sm:mt-3">
+    <div className="w-full flex justify-center gap-2 sm:gap-3 mt-1 sm:mt-2">
       <CounterButton
         icon="⚡"
         label="Energy"
@@ -717,15 +711,17 @@ function CounterButton({ icon, label, value, onClick, danger }) {
     <div className="relative">
       <button
         onClick={() => setShowControls(!showControls)}
+        onBlur={() => setShowControls(false)}
         style={{
           background: "transparent",
           border: "none",
           padding: 0,
           cursor: "pointer",
+          fontSize: "clamp(0.875rem, 5vw, 1.5rem)",
         }}
-        className={`text-lg sm:text-xl lg:text-2xl transition-all ${
+        className={`transition-all ${
           value > 0
-            ? "text-black text-opacity-90 scale-110 sm:scale-125 filter drop-shadow-lg"
+            ? "text-black text-opacity-90 scale-110 sm:scale-125 drop-shadow-lg"
             : "text-black text-opacity-40 hover:text-opacity-70 hover:scale-110"
         } ${danger ? "animate-pulse" : ""}`}
         aria-label={label}
@@ -735,23 +731,25 @@ function CounterButton({ icon, label, value, onClick, danger }) {
       </button>
 
       {showControls && (
-        <div className="absolute bottom-full mb-2 sm:mb-3 left-1/2 transform -translate-x-1/2 bg-slate-900 bg-opacity-95 backdrop-blur-md rounded-xl sm:rounded-2xl p-2 sm:p-3 flex gap-2 whitespace-nowrap shadow-2xl border border-slate-700 z-10">
+        <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-3 bg-slate-900 bg-opacity-95 backdrop-blur-md rounded-xl p-2 sm:p-3 flex gap-2 shadow-2xl border border-slate-700 z-20">
           <button
             onClick={() => {
               onClick(-1);
+              setShowControls(false);
             }}
-            className="px-3 sm:px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-lg sm:rounded-xl font-bold text-xs sm:text-sm transition-all transform hover:scale-105 shadow-lg"
+            className="px-3 sm:px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-bold text-xs sm:text-sm transition-colors"
           >
             -
           </button>
-          <span className="px-2 sm:px-3 py-2 text-white font-bold text-xs sm:text-sm bg-slate-700 rounded-lg sm:rounded-xl min-w-[1.5rem] sm:min-w-[2rem] text-center">
+          <span className="px-2 sm:px-3 py-2 text-white font-bold text-xs sm:text-sm bg-slate-700 rounded-lg min-w-[1.5rem] sm:min-w-[2rem] text-center">
             {value}
           </span>
           <button
             onClick={() => {
               onClick(1);
+              setShowControls(false);
             }}
-            className="px-3 sm:px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-lg sm:rounded-xl font-bold text-xs sm:text-sm transition-all transform hover:scale-105 shadow-lg"
+            className="px-3 sm:px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-bold text-xs sm:text-sm transition-colors"
           >
             +
           </button>
