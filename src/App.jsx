@@ -717,6 +717,12 @@ function CounterButton({ icon, label, value, onClick, danger }) {
     <div className="relative">
       <button
         onClick={() => setShowControls(!showControls)}
+        style={{
+          background: "transparent",
+          border: "none",
+          padding: 0,
+          cursor: "pointer",
+        }}
         className={`text-lg sm:text-xl lg:text-2xl transition-all ${
           value > 0
             ? "text-black text-opacity-90 scale-110 sm:scale-125 filter drop-shadow-lg"
