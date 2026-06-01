@@ -98,13 +98,16 @@ function SetupScreen({
   onStart,
 }) {
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-10 overflow-y-auto">
-      <div className="bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl rounded-3xl p-6 shadow-2xl border border-slate-700/50 w-full max-w-lg my-auto">
-        <div className="text-center mb-10">
-          <h1 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 mb-2">
-            ✨ MTG Life Counter ✨
+    <div className="fixed inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4 overflow-y-auto">
+      <div className="bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl rounded-3xl p-6 sm:p-10 shadow-2xl border border-slate-700/50 w-full max-w-lg my-auto">
+        <div className="text-center mb-6 sm:mb-10">
+          <div className="text-6xl sm:text-7xl mb-4">🎴</div>
+          <h1 className="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 mb-2">
+            MTG Life Counter
           </h1>
-          <p className="text-slate-400 text-sm">Track your battles in style</p>
+          <p className="text-slate-400 text-sm sm:text-base">
+            Track your battles in style
+          </p>
         </div>
 
         <OptionSelector
@@ -127,7 +130,7 @@ function SetupScreen({
 
         <button
           onClick={onStart}
-          className="w-full py-4  bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white rounded-2xl text-xl font-bold transition-all shadow-lg hover:shadow-cyan-500/50 transform hover:scale-105 hover:shadow-2xl"
+          className="w-full py-4 sm:py-5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white rounded-2xl text-lg sm:text-xl font-bold transition-all shadow-lg hover:shadow-cyan-500/50 transform hover:scale-105 hover:shadow-2xl"
         >
           ⚔️ Start Game
         </button>
@@ -146,16 +149,16 @@ function OptionSelector({
   activeColor,
 }) {
   return (
-    <div className="mb-6 ">
-      <label className="block text-slate-300 text-basefont-bold mb-3 ">
+    <div className="mb-6 sm:mb-8">
+      <label className="block text-slate-300 text-base sm:text-lg font-bold mb-3 sm:mb-4">
         {label}
       </label>
-      <div className={`grid ${gridCols} gap-2`}>
+      <div className={`grid ${gridCols} gap-2 sm:gap-3`}>
         {options.map((option) => (
           <button
             key={option}
             onClick={() => onSelect(option)}
-            className={`py-3 sm:py-4 rounded-2xl text-lg font-bold transition-all ${
+            className={`py-3 sm:py-4 rounded-2xl text-lg sm:text-xl font-bold transition-all ${
               selected === option
                 ? `bg-gradient-to-br ${activeColor} text-white scale-105 shadow-lg`
                 : "bg-slate-700/50 text-slate-300 hover:bg-slate-600/50 hover:scale-105"
@@ -347,9 +350,21 @@ function GameStyles() {
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem;
+        padding: 0.5rem;
         position: relative;
         transition: all 0.5s ease;
+      }
+
+      @media (min-width: 640px) {
+        .player-card {
+          padding: 1rem;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .player-card {
+          padding: 1.5rem;
+        }
       }
 
       .player-card.defeated {
@@ -358,12 +373,12 @@ function GameStyles() {
       }
 
       .increment-btn {
-        font-size: 2.5rem;
+        font-size: 1.5rem;
         font-weight: 900;
-        padding: 1rem;
-        border-radius: 1.5rem;
+        padding: 0.5rem;
+        border-radius: 0.875rem;
         transition: all 0.2s;
-        border: 3px solid rgba(0, 0, 0, 0.25);
+        border: 2px solid rgba(0, 0, 0, 0.25);
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -377,9 +392,18 @@ function GameStyles() {
 
       @media (min-width: 640px) {
         .increment-btn {
-          font-size: 3rem;
-          padding: 1.25rem;
-          border-radius: 1.75rem;
+          font-size: 2rem;
+          padding: 0.75rem;
+          border-radius: 1.25rem;
+          border-width: 3px;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .increment-btn {
+          font-size: 2.5rem;
+          padding: 1rem;
+          border-radius: 1.5rem;
         }
       }
 
@@ -395,11 +419,12 @@ function GameStyles() {
       }
 
       .menu-button {
-        position: absolute;
+        position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 50;
+        background: radial-gradient(circle at 30% 30%, #1e3a8a, #0f172a);
         border: 0;
         border-radius: 50%;
         width: 60px;
@@ -414,6 +439,23 @@ function GameStyles() {
           0 10px 25px rgba(0, 0, 0, 0.5),
           inset 0 1px 0 rgba(255, 255, 255, 0.1);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      @media (min-width: 640px) {
+        .menu-button {
+          width: 75px;
+          height: 75px;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .menu-button {
+          width: 90px;
+          height: 90px;
+          position: absolute;
+          top: 15%;
+          left: 50%;
+        }
       }
       
       .menu-button::before {
@@ -445,26 +487,42 @@ function GameStyles() {
         }
       }
       
+      .menu-button:hover {
+        background: radial-gradient(circle at 30% 30%, #2563eb, #1e3a8a);
+        transform: translate(-50%, -50%) scale(1.1);
+        box-shadow: 
+          0 0 0 8px rgba(59, 130, 246, 0.15),
+          0 0 30px rgba(59, 130, 246, 0.6),
+          0 0 50px rgba(6, 182, 212, 0.3),
+          0 15px 35px rgba(0, 0, 0, 0.6),
+          inset 0 2px 0 rgba(255, 255, 255, 0.2);
+      }
+
       .menu-button:active {
         transform: translate(-50%, -50%) scale(1.05);
       }
 
       .menu-button svg {
         transition: all 0.3s;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
       }
-      
+
+      .menu-button:hover svg {
+        filter: drop-shadow(0 0 8px rgba(59, 130, 246, 1)) drop-shadow(0 0 12px rgba(6, 182, 212, 0.8));
+      }
+
       .counter-badge {
         position: absolute;
-        top: 0.5rem;
-        right: 0.5rem;
+        top: 0.4rem;
+        right: 0.4rem;
         background: rgba(0, 0, 0, 0.75);
         backdrop-filter: blur(12px);
-        border-radius: 1.25rem;
-        padding: 0.4rem 0.85rem;
-        font-size: 0.8rem;
+        border-radius: 0.875rem;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.7rem;
         font-weight: bold;
         display: flex;
-        gap: 0.6rem;
+        gap: 0.4rem;
         align-items: center;
         border: 2px solid rgba(255, 255, 255, 0.15);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -513,7 +571,12 @@ function MenuButton({ onClick }) {
       title="Menu"
       aria-label="Open Menu"
     >
-      <Menu size={36} color="#60a5fa" strokeWidth={2.5} />
+      <Menu
+        size={28}
+        color="#60a5fa"
+        strokeWidth={2.5}
+        className="sm:w-8 sm:h-8"
+      />
     </button>
   );
 }
@@ -572,13 +635,13 @@ function CounterBadges({ player }) {
 // Life Display Component
 function LifeDisplay({ life, isDefeated, playerName }) {
   return (
-    <div className="flex-1 flex flex-col items-center justify-center w-full">
+    <div className="flex-1 flex flex-col items-center justify-center w-full min-h-0">
       <div
-        className="text-9xl sm:text-[12rem] md:text-[14rem] font-black leading-none select-none mb-2"
+        className="text-5xl sm:text-8xl lg:text-9xl xl:text-[10rem] font-black leading-none select-none mb-0.5 sm:mb-1"
         style={{
           textShadow: isDefeated
-            ? "0 6px 20px rgba(0,0,0,0.6)"
-            : "0 8px 24px rgba(0,0,0,0.3)",
+            ? "0 4px 16px rgba(0,0,0,0.6)"
+            : "0 6px 20px rgba(0,0,0,0.3)",
           color: isDefeated ? "#4a4a4a" : "#000",
           fontWeight: 900,
         }}
@@ -587,7 +650,7 @@ function LifeDisplay({ life, isDefeated, playerName }) {
         {life}
       </div>
       <span
-        className={`text-sm sm:text-base font-bold ${isDefeated ? "text-gray-400" : "text-black text-opacity-60"}`}
+        className={`text-[0.6rem] sm:text-xs lg:text-sm font-bold ${isDefeated ? "text-gray-400" : "text-black text-opacity-60"}`}
       >
         {playerName} {isDefeated && "💀"}
       </span>
@@ -598,7 +661,7 @@ function LifeDisplay({ life, isDefeated, playerName }) {
 // Life Controls Component
 function LifeControls({ playerId, onUpdateLife }) {
   return (
-    <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full max-w-md">
+    <div className="grid grid-cols-2 gap-2 sm:gap-4 w-full max-w-md">
       <button
         onClick={() => onUpdateLife(playerId, -1)}
         className="increment-btn"
@@ -620,7 +683,7 @@ function LifeControls({ playerId, onUpdateLife }) {
 // Action Icons Component
 function ActionIcons({ playerId, player, onUpdateCounter }) {
   return (
-    <div className="w-full flex justify-center gap-3 sm:gap-4 mt-3 sm:mt-4">
+    <div className="w-full flex justify-center gap-1 sm:gap-3 mt-1 sm:mt-3">
       <CounterButton
         icon="⚡"
         label="Energy"
@@ -651,10 +714,10 @@ function CounterButton({ icon, label, value, onClick, danger }) {
   const [showControls, setShowControls] = useState(false);
 
   return (
-    <div className="">
+    <div className="relative">
       <button
         onClick={() => setShowControls(!showControls)}
-        className={`text-xl transition-all ${
+        className={`text-lg sm:text-xl lg:text-2xl transition-all ${
           value > 0
             ? "text-black text-opacity-90 scale-110 sm:scale-125 filter drop-shadow-lg"
             : "text-black text-opacity-40 hover:text-opacity-70 hover:scale-110"
